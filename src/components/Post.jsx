@@ -11,7 +11,6 @@ export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([
     'Post muito bacana, hein?!'
   ])
-
   const [newCommentText, setNewCommentText] = useState('')
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
@@ -34,8 +33,12 @@ export function Post({ author, content, publishedAt }) {
     setNewCommentText(event.target.value)
   }
 
-  function deleteComment(comment) {
-    console.log(`Deletar comentário: ${comment}`)
+  function deleteComment(commentToDelete) {
+    const commentsWithouthDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+
+    setComments(commentsWithouthDeletedOne)
   }
 
   return (
